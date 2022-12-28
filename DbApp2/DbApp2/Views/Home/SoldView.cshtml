@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DbApp2.Models.Database.Sold>
+
+@{
+    ViewData["Title"] = "Sprzedane";
+}
+<h2>Sprzedane produkty</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ProductName</th>
+            <th>Count</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var sold in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => sold.ProductName)</td>
+                <td>@Html.DisplayFor(modelItem => sold.Count)</td>
+                <td>@Html.DisplayFor(modelItem => sold.Value)</td>
+            </tr>
+        }
+    </tbody>
+</table>

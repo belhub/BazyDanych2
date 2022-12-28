@@ -1,0 +1,34 @@
+﻿@model IEnumerable<DbApp2.Models.Database.Reservation>
+
+@{
+    ViewData["Title"] = "Rezerwacje";
+}
+
+<h2>Rezerwacje</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>LastName</th>
+            <th>Product</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>ReceptionDate</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var reservations in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => reservations.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => reservations.Product)</td>
+                <td>@Html.DisplayFor(modelItem => reservations.Amount)</td>
+                <td>@Html.DisplayFor(modelItem => reservations.Price)</td>
+                <td>@Html.DisplayFor(modelItem => reservations.ReceptionDate)</td>
+                <td>@Html.DisplayFor(modelItem => reservations.Status)</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DbApp2.Models.Database.Worker>
+@{
+    ViewData["Title"] = "Pracownicy";
+}
+
+<h2>Lista Pracowników</h2>
+
+<table>
+    <thead>
+        <<tr>
+            <td>LastName</td>
+            <td>FirstName</td>
+            <td>Salary</td>
+            <td>ManagerId</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var workers in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => workers.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => workers.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => workers.Salary)</td>
+                <td>@Html.DisplayFor(modelItem => workers.ManagerId)</td>
+            </tr>
+        }
+    </tbody>
+</table>
