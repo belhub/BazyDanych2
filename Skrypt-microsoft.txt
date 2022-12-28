@@ -1,0 +1,160 @@
+CREATE TABLE Section
+(
+    _name CHAR(80) PRIMARY KEY,
+    manager_id INT
+);
+
+CREATE TABLE Workers
+(
+	ID INT PRIMARY KEY,
+    last_name CHAR(80),
+    first_name CHAR(80),
+    salary FLOAT,
+    manager_id INT
+);
+
+CREATE TABLE Series
+(
+    _name CHAR(80) PRIMARY KEY,
+    _code INT
+);
+
+CREATE TABLE Waste
+(
+	product_name CHAR(80),
+    count INT,
+    _value FLOAT
+);
+
+CREATE TABLE Sold
+(
+	product_name CHAR(80),
+    count INT,
+    _value FLOAT
+);
+
+CREATE TABLE Reservations
+(
+	ID INT,
+    last_name CHAR(80),
+    product_id INT,
+    amount INT,
+    price FLOAT,
+    reception_date DATE,
+    status CHAR(80)
+);
+
+CREATE TABLE Products
+(
+	ID INT PRIMARY KEY,
+    _name CHAR(80),
+    delivery_date DATE,
+    expiration_date DATE,
+    price FLOAT,
+    series CHAR(80),
+    place CHAR(80)
+);
+
+ALTER TABLE Section
+ADD FOREIGN KEY (manager_id) REFERENCES Workers(ID);
+
+ALTER TABLE Waste
+ADD FOREIGN KEY (product_name) REFERENCES Series(_name);
+
+ALTER TABLE Sold
+ADD FOREIGN KEY (product_name) REFERENCES Series(_name);
+
+ALTER TABLE Reservations
+ADD FOREIGN KEY (product_id) REFERENCES Products(ID);
+
+ALTER TABLE Products
+ADD FOREIGN KEY (_name) REFERENCES Series(_name);
+
+ALTER TABLE Products
+ADD FOREIGN KEY (place) REFERENCES Section(_name);
+
+INSERT INTO series (_name,_code)
+VALUES ('Mleko Laciate [opak. 1l]',221674),
+       ('Ketchup Pudliszki [opak. 750ml]',509981),
+       ('Maślanka Mrągowska [opak. 1l]',222969);
+
+INSERT INTO workers (ID,last_name,first_name,salary,manager_id)
+VALUES (420,'Piątkowski','Mariusz',3840.60,2),
+       (421,'Lisowski','Józef',3840.60,2),
+       (555,'Pytka','Arkadiusz',4420.87,3),
+       (2,'Andrzejewicz','Bartłomiej',7800.77,0),
+       (3,'Kurek','Janusz',8240.31,0),
+       (8,'Bond','James',6529.19,0);
+
+INSERT INTO section (_name,manager_id)
+VALUES ('Magazyn',2),
+       ('Dostawy',3),
+       ('Lada',8);
+
+INSERT INTO waste (product_name,count,_value)
+VALUES ('Mleko Łaciate [opak. 1l]',17,23.80),
+       ('Ketchup Pudliszki [opak. 750ml]',64,268.80);
+
+INSERT INTO sold (product_name,count,_value)
+VALUES ('Mleko Łaciate [opak. 1l]',483,676.20),
+       ('Ketchup Pudliszki [opak. 750ml]',64,991.20),
+       ('Maślanka Mrągowska [opak. 1l]',140,420.00);
+
+INSERT INTO products (ID,_name,delivery_date,expiration_date,price,series,place)
+VALUES (111,'Mleko Łaciate [opak. 1l]','2022-05-16','2022-05-30',1.40,'Mleko Łaciate [opak. 1l]','Magazyn'),
+       (112,'Mleko Łaciate [opak. 1l]','2022-05-23','2022-06-06',1.60,'Mleko Łaciate [opak. 1l]','Magazyn'),
+       (211,'Maślanka Mrągowska [opak. 1l]','2022-05-23','2022-06-06',2.20,'Maślanka Mrągowska [opak. 1l]','Magazyn'),
+       (459,'Ketchup Pudliszki [opak. 750ml]','2022-05-19','2022-08-29',4.90,'Ketchup Pudliszki [opak. 750ml]','Magazyn');
+       
+
+INSERT INTO reservations (ID,last_name,product_id,amount,price,reception_date,status)
+VALUES (1021,'Nowak',111,5,7.00,'2022-05-31','ready'),
+       (1022,'Nowak',211,5,11.00,'2022-05-31','during preparation');
+
+
+
+
+INSERT INTO [AppDB].[dbo].[Series] ([_name],[_code])
+VALUES ('Mleko Laciate [opak. 1l]',221674),
+       ('Ketchup Pudliszki [opak. 750ml]',509981),
+       ('Maślanka Mrągowska [opak. 1l]',222969);
+
+INSERT INTO [AppDB].[dbo].[Workers] ([ID],[last_name],[first_name],[salary],[manager_id])
+VALUES (420,'Piątkowski','Mariusz',3840.60,2),
+       (421,'Lisowski','Józef',3840.60,2),
+       (555,'Pytka','Arkadiusz',4420.87,3),
+       (2,'Andrzejewicz','Bartłomiej',7800.77,0),
+       (3,'Kurek','Janusz',8240.31,0),
+       (8,'Bond','James',6529.19,0);
+
+INSERT INTO [AppDB].[dbo].[Section] ([_name],[manager_id])
+VALUES ('Magazyn',2),
+       ('Dostawy',3),
+       ('Lada',8);
+
+INSERT INTO [AppDB].[dbo].[Waste] ([product_name],count,[_value])
+VALUES ('Mleko Łaciate [opak. 1l]',17,23.80),
+       ('Ketchup Pudliszki [opak. 750ml]',64,268.80);
+
+INSERT INTO [AppDB].[dbo].[Sold] ([product_name],count,[_value])
+VALUES ('Mleko Łaciate [opak. 1l]',483,676.20),
+       ('Ketchup Pudliszki [opak. 750ml]',64,991.20),
+       ('Maślanka Mrągowska [opak. 1l]',140,420.00);
+
+INSERT INTO [AppDB].[dbo].[Products] ([ID],[_name],[delivery_date],[expiration_date],[price],[series],[place])
+VALUES (111,'Mleko Łaciate [opak. 1l]','2022-05-16','2022-05-30',1.40,'Mleko Łaciate [opak. 1l]','Magazyn'),
+       (112,'Mleko Łaciate [opak. 1l]','2022-05-23','2022-06-06',1.60,'Mleko Łaciate [opak. 1l]','Magazyn'),
+       (211,'Maślanka Mrągowska [opak. 1l]','2022-05-23','2022-06-06',2.20,'Maślanka Mrągowska [opak. 1l]','Magazyn'),
+       (459,'Ketchup Pudliszki [opak. 750ml]','2022-05-19','2022-08-29',4.90,'Ketchup Pudliszki [opak. 750ml]','Magazyn');
+       
+
+INSERT INTO [AppDB].[dbo].[Reservations] ([ID],[last_name],[product_id],[amount],[price],[reception_date],[status])
+VALUES (1021,'Nowak',111,5,7.00,'2022-05-31','ready'),
+       (1022,'Nowak',211,5,11.00,'2022-05-31','during preparation');
+
+AppDB.dbo.Products: FK__Products___name__30F848ED,delivery_date,expiration_date,price,series,place)
+
+
+INSERT INTO [AppDB].[dbo].[Waste] ([product_name],count,[_value])
+VALUES ((select _name from series where _name='Mleko Laciate [opak. 1l]'),17,23.80),
+       ((select _name from series where _name='Ketchup Pudliszki [opak. 750ml]'),64,268.80);
