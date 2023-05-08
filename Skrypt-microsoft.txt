@@ -1,160 +1,237 @@
-CREATE TABLE Section
+USE [AppDB]
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
 (
-    _name CHAR(80) PRIMARY KEY,
-    manager_id INT 
-);
-
-CREATE TABLE Workers
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Managers]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Managers](
+	[Id] [int] NOT NULL,
+	[last_name] [char](80) NULL,
+	[first_name] [char](80) NULL,
+	[salary] [float] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY ,
-    last_name CHAR(80),
-    first_name CHAR(80),
-    salary FLOAT,
-    manager_id INT
-);
-
-CREATE TABLE Series
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[ID] [int] NOT NULL,
+	[_name] [char](80) NULL,
+	[delivery_date] [date] NULL,
+	[expiration_date] [date] NULL,
+	[price] [float] NULL,
+	[place] [char](80) NULL,
+PRIMARY KEY CLUSTERED 
 (
-    _name CHAR(80) PRIMARY KEY,
-    _code INT
-);
-
-CREATE TABLE Waste
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservations]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservations](
+	[ID] [int] NOT NULL,
+	[last_name] [char](80) NULL,
+	[product_id] [int] NULL,
+	[amount] [int] NULL,
+	[price] [float] NULL,
+	[reception_date] [date] NULL,
+	[status] [char](80) NULL,
+PRIMARY KEY CLUSTERED 
 (
-	product_name CHAR(80),
-    count INT,
-    _value FLOAT
-);
-
-CREATE TABLE Sold
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Section]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Section](
+	[_name] [char](80) NOT NULL,
+	[manager_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	product_name CHAR(80),
-    count INT,
-    _value FLOAT
-);
-
-CREATE TABLE Reservations
+	[_name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Series]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Series](
+	[_name] [char](80) NOT NULL,
+	[_code] [int] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    last_name CHAR(80),
-    product_id INT,
-    amount INT,
-    price FLOAT,
-    reception_date DATE,
-    status CHAR(80)
-);
-
-CREATE TABLE Products
+	[_name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sold]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sold](
+	[product_name] [char](80) NULL,
+	[count] [int] NULL,
+	[_value] [float] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Waste]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Waste](
+	[product_name] [char](80) NULL,
+	[count] [int] NULL,
+	[_value] [float] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Workers]    Script Date: 08.05.2023 11:34:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Workers](
+	[ID] [int] NOT NULL,
+	[last_name] [char](80) NULL,
+	[first_name] [char](80) NULL,
+	[salary] [float] NULL,
+	[manager_id] [int] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	ID INT NOT NULL IDENTITY(1,1)  PRIMARY KEY,
-    _name CHAR(80),
-    delivery_date DATE,
-    expiration_date DATE,
-    price FLOAT,
-    series CHAR(80),
-    place CHAR(80)
-);
-
-ALTER TABLE Section
-ADD FOREIGN KEY (manager_id) REFERENCES Workers(ID);
-
-ALTER TABLE Waste
-ADD FOREIGN KEY (product_name) REFERENCES Series(_name);
-
-ALTER TABLE Sold
-ADD FOREIGN KEY (product_name) REFERENCES Series(_name);
-
-ALTER TABLE Reservations
-ADD FOREIGN KEY (product_id) REFERENCES Products(ID);
-
-ALTER TABLE Products
-ADD FOREIGN KEY (_name) REFERENCES Series(_name);
-
-ALTER TABLE Products
-ADD FOREIGN KEY (place) REFERENCES Section(_name);
-
-INSERT INTO series (_name,_code)
-VALUES ('Mleko Laciate [opak. 1l]',221674),
-       ('Ketchup Pudliszki [opak. 750ml]',509981),
-       ('Maślanka Mrągowska [opak. 1l]',222969);
-
-INSERT INTO workers (ID,last_name,first_name,salary,manager_id)
-VALUES (420,'Piątkowski','Mariusz',3840.60,2),
-       (421,'Lisowski','Józef',3840.60,2),
-       (555,'Pytka','Arkadiusz',4420.87,3),
-       (2,'Andrzejewicz','Bartłomiej',7800.77,0),
-       (3,'Kurek','Janusz',8240.31,0),
-       (8,'Bond','James',6529.19,0);
-
-INSERT INTO section (_name,manager_id)
-VALUES ('Magazyn',2),
-       ('Dostawy',3),
-       ('Lada',8);
-
-INSERT INTO waste (product_name,count,_value)
-VALUES ('Mleko Łaciate [opak. 1l]',17,23.80),
-       ('Ketchup Pudliszki [opak. 750ml]',64,268.80);
-
-INSERT INTO sold (product_name,count,_value)
-VALUES ('Mleko Łaciate [opak. 1l]',483,676.20),
-       ('Ketchup Pudliszki [opak. 750ml]',64,991.20),
-       ('Maślanka Mrągowska [opak. 1l]',140,420.00);
-
-INSERT INTO products (ID,_name,delivery_date,expiration_date,price,series,place)
-VALUES (111,'Mleko Łaciate [opak. 1l]','2022-05-16','2022-05-30',1.40,'Mleko Łaciate [opak. 1l]','Magazyn'),
-       (112,'Mleko Łaciate [opak. 1l]','2022-05-23','2022-06-06',1.60,'Mleko Łaciate [opak. 1l]','Magazyn'),
-       (211,'Maślanka Mrągowska [opak. 1l]','2022-05-23','2022-06-06',2.20,'Maślanka Mrągowska [opak. 1l]','Magazyn'),
-       (459,'Ketchup Pudliszki [opak. 750ml]','2022-05-19','2022-08-29',4.90,'Ketchup Pudliszki [opak. 750ml]','Magazyn');
-       
-
-INSERT INTO reservations (ID,last_name,product_id,amount,price,reception_date,status)
-VALUES (1021,'Nowak',111,5,7.00,'2022-05-31','ready'),
-       (1022,'Nowak',211,5,11.00,'2022-05-31','during preparation');
-
-
-
-
-INSERT INTO [AppDB].[dbo].[Series] ([_name],[_code])
-VALUES ('Mleko Laciate [opak. 1l]',221674),
-       ('Ketchup Pudliszki [opak. 750ml]',509981),
-       ('Maślanka Mrągowska [opak. 1l]',222969);
-
-INSERT INTO [AppDB].[dbo].[Workers] ([ID],[last_name],[first_name],[salary],[manager_id])
-VALUES (420,'Piątkowski','Mariusz',3840.60,2),
-       (421,'Lisowski','Józef',3840.60,2),
-       (555,'Pytka','Arkadiusz',4420.87,3),
-       (2,'Andrzejewicz','Bartłomiej',7800.77,0),
-       (3,'Kurek','Janusz',8240.31,0),
-       (8,'Bond','James',6529.19,0);
-
-INSERT INTO [AppDB].[dbo].[Section] ([_name],[manager_id])
-VALUES ('Magazyn',2),
-       ('Dostawy',3),
-       ('Lada',8);
-
-INSERT INTO [AppDB].[dbo].[Waste] ([product_name],count,[_value])
-VALUES ('Mleko Łaciate [opak. 1l]',17,23.80),
-       ('Ketchup Pudliszki [opak. 750ml]',64,268.80);
-
-INSERT INTO [AppDB].[dbo].[Sold] ([product_name],count,[_value])
-VALUES ('Mleko Łaciate [opak. 1l]',483,676.20),
-       ('Ketchup Pudliszki [opak. 750ml]',64,991.20),
-       ('Maślanka Mrągowska [opak. 1l]',140,420.00);
-
-INSERT INTO [AppDB].[dbo].[Products] ([ID],[_name],[delivery_date],[expiration_date],[price],[series],[place])
-VALUES (111,'Mleko Łaciate [opak. 1l]','2022-05-16','2022-05-30',1.40,'Mleko Łaciate [opak. 1l]','Magazyn'),
-       (112,'Mleko Łaciate [opak. 1l]','2022-05-23','2022-06-06',1.60,'Mleko Łaciate [opak. 1l]','Magazyn'),
-       (211,'Maślanka Mrągowska [opak. 1l]','2022-05-23','2022-06-06',2.20,'Maślanka Mrągowska [opak. 1l]','Magazyn'),
-       (459,'Ketchup Pudliszki [opak. 750ml]','2022-05-19','2022-08-29',4.90,'Ketchup Pudliszki [opak. 750ml]','Magazyn');
-       
-
-INSERT INTO [AppDB].[dbo].[Reservations] ([ID],[last_name],[product_id],[amount],[price],[reception_date],[status])
-VALUES (1021,'Nowak',111,5,7.00,'2022-05-31','ready'),
-       (1022,'Nowak',211,5,11.00,'2022-05-31','during preparation');
-
-AppDB.dbo.Products: FK__Products___name__30F848ED,delivery_date,expiration_date,price,series,place)
-
-
-INSERT INTO [AppDB].[dbo].[Waste] ([product_name],count,[_value])
-VALUES ((select _name from series where _name='Mleko Laciate [opak. 1l]'),17,23.80),
-       ((select _name from series where _name='Ketchup Pudliszki [opak. 750ml]'),64,268.80);
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[Managers] ([Id], [last_name], [first_name], [salary]) VALUES (1, N'Andrzejewicz                                                                    ', N'Bartłomiej                                                                      ', 69223.65)
+GO
+INSERT [dbo].[Managers] ([Id], [last_name], [first_name], [salary]) VALUES (2, N'Kurek                                                                           ', N'Jurek                                                                           ', 86000.69)
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (1, N'Cukierki [opakowanie 250g]                                                      ', CAST(N'2022-12-27' AS Date), CAST(N'2023-01-21' AS Date), 2.69, N'Magazyn                                                                         ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (111, N'Mleko Laciate [opak. 1l]                                                        ', CAST(N'2022-05-16' AS Date), CAST(N'2023-02-23' AS Date), 2.69, N'Dostawy                                                                         ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (112, N'Mleko Laciate [opak. 1l]                                                        ', CAST(N'2022-05-23' AS Date), CAST(N'2023-01-27' AS Date), 4.66, N'Magazyn                                                                         ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (211, N'Maślanka Mrągowska [opak. 1l]                                                   ', CAST(N'2022-05-23' AS Date), CAST(N'2022-06-06' AS Date), 2.2, N'Magazyn                                                                         ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (459, N'Ketchup Pudliszki [opak. 750ml]                                                 ', CAST(N'2022-05-19' AS Date), CAST(N'2022-08-29' AS Date), 4.9, N'Magazyn                                                                         ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (460, N'Maślanka Mrągowska [opak. 1l]                                                   ', CAST(N'2023-01-08' AS Date), CAST(N'2023-01-29' AS Date), 5.2, N'Lada                                                                            ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (461, N'Piwo Lech [opak. 500ml]                                                         ', CAST(N'2022-12-29' AS Date), CAST(N'2023-01-28' AS Date), 2.5, N'Lada                                                                            ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (462, N'Ketchup Pudliszki [opak. 750ml]                                                 ', CAST(N'2022-12-30' AS Date), CAST(N'2023-01-29' AS Date), 12.33, N'Dostawy                                                                         ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (463, N'Ketchup Pudliszki [opak. 750ml]                                                 ', CAST(N'2022-12-30' AS Date), CAST(N'2023-02-21' AS Date), 3.33, N'Lada                                                                            ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (464, N'Piwo Lech [opak. 500ml]                                                         ', CAST(N'2023-01-01' AS Date), CAST(N'2023-02-03' AS Date), 3.05, N'Lada                                                                            ')
+GO
+INSERT [dbo].[Products] ([ID], [_name], [delivery_date], [expiration_date], [price], [place]) VALUES (465, N'Maślanka Mrągowska [opak. 1l]                                                   ', CAST(N'2023-02-02' AS Date), CAST(N'2023-02-26' AS Date), 1.23, N'Magazyn                                                                         ')
+GO
+INSERT [dbo].[Reservations] ([ID], [last_name], [product_id], [amount], [price], [reception_date], [status]) VALUES (1, N'Kura                                                                            ', 111, 12, 12, CAST(N'2023-02-22' AS Date), N'Ready                                                                           ')
+GO
+INSERT [dbo].[Reservations] ([ID], [last_name], [product_id], [amount], [price], [reception_date], [status]) VALUES (2, N'Chomik                                                                          ', 1, 4, 123, CAST(N'2023-01-29' AS Date), N'Ready                                                                           ')
+GO
+INSERT [dbo].[Reservations] ([ID], [last_name], [product_id], [amount], [price], [reception_date], [status]) VALUES (3, N'Chom                                                                            ', 112, 4, 123, CAST(N'2023-01-20' AS Date), N'Ready                                                                           ')
+GO
+INSERT [dbo].[Reservations] ([ID], [last_name], [product_id], [amount], [price], [reception_date], [status]) VALUES (4, N'Kowalski                                                                        ', 112, 5, 20.69, CAST(N'2023-01-21' AS Date), N'During Preparation                                                              ')
+GO
+INSERT [dbo].[Reservations] ([ID], [last_name], [product_id], [amount], [price], [reception_date], [status]) VALUES (5, N'iugu                                                                            ', 1, 12, 123.55, CAST(N'2023-01-06' AS Date), N'During Preparation                                                              ')
+GO
+INSERT [dbo].[Reservations] ([ID], [last_name], [product_id], [amount], [price], [reception_date], [status]) VALUES (6, N'Qwerty                                                                          ', 462, 3, 21.55, CAST(N'2023-02-03' AS Date), N'During Preparation                                                              ')
+GO
+INSERT [dbo].[Section] ([_name], [manager_id]) VALUES (N'Dostawy                                                                         ', 2)
+GO
+INSERT [dbo].[Section] ([_name], [manager_id]) VALUES (N'Lada                                                                            ', NULL)
+GO
+INSERT [dbo].[Section] ([_name], [manager_id]) VALUES (N'Magazyn                                                                         ', 1)
+GO
+INSERT [dbo].[Series] ([_name], [_code]) VALUES (N'Cukierki [opakowanie 250g]                                                      ', 123456)
+GO
+INSERT [dbo].[Series] ([_name], [_code]) VALUES (N'Ketchup Pudliszki [opak. 750ml]                                                 ', 509981)
+GO
+INSERT [dbo].[Series] ([_name], [_code]) VALUES (N'Maślanka Mrągowska [opak. 1l]                                                   ', 222969)
+GO
+INSERT [dbo].[Series] ([_name], [_code]) VALUES (N'Mleko Laciate [opak. 1l]                                                        ', 221674)
+GO
+INSERT [dbo].[Series] ([_name], [_code]) VALUES (N'Piwo Lech [opak. 500ml]                                                         ', 213769)
+GO
+INSERT [dbo].[Sold] ([product_name], [count], [_value]) VALUES (N'Mleko Laciate [opak. 1l]                                                        ', 483, 676.2)
+GO
+INSERT [dbo].[Sold] ([product_name], [count], [_value]) VALUES (N'Ketchup Pudliszki [opak. 750ml]                                                 ', 64, 991.2)
+GO
+INSERT [dbo].[Sold] ([product_name], [count], [_value]) VALUES (N'Maślanka Mrągowska [opak. 1l]                                                   ', 140, 420)
+GO
+INSERT [dbo].[Waste] ([product_name], [count], [_value]) VALUES (N'Mleko Laciate [opak. 1l]                                                        ', 17, 23.8)
+GO
+INSERT [dbo].[Waste] ([product_name], [count], [_value]) VALUES (N'Ketchup Pudliszki [opak. 750ml]                                                 ', 64, 268.8)
+GO
+INSERT [dbo].[Workers] ([ID], [last_name], [first_name], [salary], [manager_id]) VALUES (420, N'Piątkowski                                                                      ', N'Mariusz                                                                         ', 3840.6, 1)
+GO
+INSERT [dbo].[Workers] ([ID], [last_name], [first_name], [salary], [manager_id]) VALUES (421, N'Lisowski                                                                        ', N'Józef                                                                           ', 3840.6, 1)
+GO
+INSERT [dbo].[Workers] ([ID], [last_name], [first_name], [salary], [manager_id]) VALUES (555, N'Ogarek                                                                          ', N'Arek                                                                            ', 4420.87, 2)
+GO
+INSERT [dbo].[Workers] ([ID], [last_name], [first_name], [salary], [manager_id]) VALUES (560, N'Chomiak                                                                         ', N'Dawid                                                                           ', 33.69, 2)
+GO
+ALTER TABLE [dbo].[Products]  WITH CHECK ADD FOREIGN KEY([_name])
+REFERENCES [dbo].[Series] ([_name])
+GO
+ALTER TABLE [dbo].[Products]  WITH CHECK ADD FOREIGN KEY([place])
+REFERENCES [dbo].[Section] ([_name])
+GO
+ALTER TABLE [dbo].[Reservations]  WITH CHECK ADD FOREIGN KEY([product_id])
+REFERENCES [dbo].[Products] ([ID])
+GO
+ALTER TABLE [dbo].[Section]  WITH CHECK ADD  CONSTRAINT [managersIDSection_FK] FOREIGN KEY([manager_id])
+REFERENCES [dbo].[Managers] ([Id])
+ON UPDATE CASCADE
+ON DELETE SET NULL
+GO
+ALTER TABLE [dbo].[Section] CHECK CONSTRAINT [managersIDSection_FK]
+GO
+ALTER TABLE [dbo].[Sold]  WITH CHECK ADD FOREIGN KEY([product_name])
+REFERENCES [dbo].[Series] ([_name])
+GO
+ALTER TABLE [dbo].[Waste]  WITH CHECK ADD FOREIGN KEY([product_name])
+REFERENCES [dbo].[Series] ([_name])
+GO
+ALTER TABLE [dbo].[Workers]  WITH CHECK ADD  CONSTRAINT [managersID_FK] FOREIGN KEY([manager_id])
+REFERENCES [dbo].[Managers] ([Id])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Workers] CHECK CONSTRAINT [managersID_FK]
+GO
