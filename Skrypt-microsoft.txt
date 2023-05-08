@@ -1,12 +1,12 @@
 CREATE TABLE Section
 (
     _name CHAR(80) PRIMARY KEY,
-    manager_id INT
+    manager_id INT 
 );
 
 CREATE TABLE Workers
 (
-	ID INT PRIMARY KEY,
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY ,
     last_name CHAR(80),
     first_name CHAR(80),
     salary FLOAT,
@@ -35,7 +35,7 @@ CREATE TABLE Sold
 
 CREATE TABLE Reservations
 (
-	ID INT,
+	ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     last_name CHAR(80),
     product_id INT,
     amount INT,
@@ -46,7 +46,7 @@ CREATE TABLE Reservations
 
 CREATE TABLE Products
 (
-	ID INT PRIMARY KEY,
+	ID INT NOT NULL IDENTITY(1,1)  PRIMARY KEY,
     _name CHAR(80),
     delivery_date DATE,
     expiration_date DATE,

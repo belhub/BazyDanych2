@@ -19,6 +19,7 @@ namespace DbApp2.Models.Database
         public virtual DbSet<Sold> Solds { get; set; } = null!;
         public virtual DbSet<Waste> Wastes { get; set; } = null!;
         public virtual DbSet<Worker> Workers { get; set; } = null!;
+        public virtual DbSet<Manager> Managers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -59,13 +60,10 @@ namespace DbApp2.Models.Database
                     .HasColumnName("place")
                     .IsFixedLength();
 
-                entity.Property(e => e.Price).HasColumnName("price");
+                entity.Property(e => e.Price)
+                    .HasColumnType("float")
+                    .HasColumnName("price");
 
-                entity.Property(e => e.Series)
-                    .HasMaxLength(80)
-                    .IsUnicode(false)
-                    .HasColumnName("series")
-                    .IsFixedLength();
 
                 entity.HasOne(d => d.NameNavigation)
                     .WithMany(p => p.Products)
@@ -80,8 +78,6 @@ namespace DbApp2.Models.Database
 
             modelBuilder.Entity<Reservation>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.Property(e => e.Amount).HasColumnName("amount");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -92,7 +88,9 @@ namespace DbApp2.Models.Database
                     .HasColumnName("last_name")
                     .IsFixedLength();
 
-                entity.Property(e => e.Price).HasColumnName("price");
+                entity.Property(e => e.Price)
+                    .HasColumnType("float")
+                    .HasColumnName("price"); ;
 
                 entity.Property(e => e.ProductId).HasColumnName("product_id");
 
@@ -161,7 +159,9 @@ namespace DbApp2.Models.Database
                     .HasColumnName("product_name")
                     .IsFixedLength();
 
-                entity.Property(e => e.Value).HasColumnName("_value");
+                entity.Property(e => e.Value)
+                    .HasColumnType("float")
+                    .HasColumnName("_value");
 
                 entity.HasOne(d => d.ProductNameNavigation)
                     .WithMany()
@@ -183,7 +183,9 @@ namespace DbApp2.Models.Database
                     .HasColumnName("product_name")
                     .IsFixedLength();
 
-                entity.Property(e => e.Value).HasColumnName("_value");
+                entity.Property(e => e.Value)
+                    .HasColumnType("float")
+                    .HasColumnName("_value");
 
                 entity.HasOne(d => d.ProductNameNavigation)
                     .WithMany()
@@ -210,6 +212,27 @@ namespace DbApp2.Models.Database
                     .IsFixedLength();
 
                 entity.Property(e => e.ManagerId).HasColumnName("manager_id");
+
+                entity.Property(e => e.Salary)
+                    .HasColumnType("float")
+                    .HasColumnName("salary");
+            });
+
+            modelBuilder.Entity<Manager>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(80)
+                    .IsUnicode(false)
+                    .HasColumnName("first_name")
+                    .IsFixedLength();
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(80)
+                    .IsUnicode(false)
+                    .HasColumnName("last_name")
+                    .IsFixedLength();
 
                 entity.Property(e => e.Salary).HasColumnName("salary");
             });

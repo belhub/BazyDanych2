@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DbApp2.Models.Database.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<script>
+    function roundPrice(){
+    var price = Document.getElementById("price");
+    price = Math.round(100*price)/100;
+    return price;
+    }
+</script>
+
+<h1>Products</h1>
+
+<p>
+    @if (User.Identity.Name == "admin@admin.com")
+        {
+            <a asp-action="Create">Create New</a>
+        }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Delivery Date
+            </th>
+            <th>
+                Expiration Date
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                Name Navigation
+            </th>
+            <th>
+                Place Navigation
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @item.DeliveryDate.ToShortDateString()
+            </td>
+            <td>
+                    @if (DateTime.Compare(item.ExpirationDate, item.ActualDate) < 0)
+                    {
+
+                        <b style="color:red;">@item.ExpirationDate.ToShortDateString()</b>
+                    }
+                    else
+                    {
+                        @item.ExpirationDate.ToShortDateString()
+                    }
+                </td>
+            <td>
+                @Math.Round(Convert.ToDouble(item.Price),2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameNavigation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlaceNavigation.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                
+                    @if (User.Identity.Name == "admin@admin.com")
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

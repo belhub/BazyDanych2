@@ -18,6 +18,7 @@ namespace DbApp2.Controllers
         public IActionResult ProductsView()
         {
             var products = _context.Products.ToList();
+            //products.FindLastIndex(products.Id);
             return View(products);
         }
 
@@ -37,14 +38,6 @@ namespace DbApp2.Controllers
         {
             var worksers = _context.Workers.ToList();
             return View(worksers);
-        }
-
-        public IActionResult CreateProductView(int id)
-        {
-            var product = _context.Products
-                .Find(id);
-            ViewBag.product= product;
-            return View(product);
         }
 
         public IActionResult Index()

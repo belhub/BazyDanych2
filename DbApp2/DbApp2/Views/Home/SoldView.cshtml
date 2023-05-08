@@ -4,12 +4,12 @@
     ViewData["Title"] = "Sprzedane";
 }
 <h2>Sprzedane produkty</h2>
-<table>
+<table class="table">
     <thead>
         <tr>
-            <th>ProductName</th>
-            <th>Count</th>
-            <th>Value</th>
+            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+            <th>@Html.DisplayNameFor(model => model.Count)</th>
+            <th>@Html.DisplayNameFor(model => model.Value)</th>
         </tr>
     </thead>
     <tbody>
